@@ -1,0 +1,24 @@
+version: '2'
+services:
+  dev-front-end:
+    container_name: dev-front-end
+    image: asia.gcr.io/inc-prd-datalake/webapp/front-end:1.0.0
+    restart: always
+    ports:
+     - 8610:80
+    volumes:
+     - /opt/docker/webApp/dev/webAppUI:/app
+    environment:
+     - BACK_END=34.64.76.193:8701
+     - AIRFLOW=34.64.148.65
+     - GRAFANA=34.64.148.65:3000
+  dev-back-end:
+    container_name: dev-back-end
+    image: asia.gcr.io/inc-prd-datalake/webapp/back-end:1.0.2
+    restart: always
+    ports:
+     - 8611:80
+    volumes:
+     - /opt/docker/webApp/dev/webAppFastAPI:/app
+    environment:
+     - DOMAIN=shinsegae.com
